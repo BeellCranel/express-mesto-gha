@@ -4,16 +4,19 @@ const NotFoundError = require('../errors/NotFounError');
 
 const findUsers = (req, res, next) => {
   User.find({})
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => {
+      if (!user) throw new NotFoundError('В базе нет пользователей');
+      res.status(200).send({ data: user });
+    })
     .catch((err) => next(err));
 };
 
 const findUserById = (req, res, next) => {
-  const searchUser = req.params.userId ? req.params.userId : req.user._id;
-  User.findById(searchUser)
+  const userId = req.params.userId ? req.params.userId : req.user._id;
+  User.findById(userId)
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
-      return res.status(200).send({ data: user });
+      res.status(200).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') next(new BadReqError('Переданы некорректные данные. Пользователь с этим Id отсутствует'));
