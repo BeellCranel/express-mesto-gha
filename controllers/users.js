@@ -51,11 +51,11 @@ const updateUser = (req, res, next) => {
     upsert: true,
   })
     .then((user) => {
-      if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
+      if (!user) throw new NotFoundError('Пользователь с указанным _id не найден');
       res.status(200).send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при редактировании профеля'));
+      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при обновлении профиля'));
       next(err);
     });
 };
@@ -69,11 +69,11 @@ const updateAvatar = (req, res, next) => {
     upsert: true,
   })
     .then((user) => {
-      if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
+      if (!user) throw new NotFoundError('Пользователь с указанным _id не найден');
       res.status(200).send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при редактировании аватара'));
+      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при обновлении аватара'));
       next(err);
     });
 };

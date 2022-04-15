@@ -13,12 +13,16 @@
     "type": "git",
     "url": "git+https://github.com/BeellCranel/express-mesto-gha.git"
   },
-  "author": "Roman Dergach",
+  "author": {
+    "name": "Roman Dergach",
+    "email": "dergachroma@gmail.com",
+    "url": "https://github.com/BeellCranel"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/BeellCranel/express-mesto-gha/issues"
   },
-  "homepage": "https://github.com/BeellCranel/express-mesto-gha#readme",
+  "homepage": "https://github.com/BeellCranel/express-mesto-gha",
   "dependencies": {
     "express": "^4.17.3",
     "mongoose": "^6.2.10"

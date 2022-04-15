@@ -18,7 +18,7 @@ const createCard = (req, res, next) => {
 const deleteCard = (req, res, next) => {
   Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {
-      if (!card) throw new NotFoundError('Карточка м этим Id отсутствует');
+      if (!card) throw new NotFoundError('Карточка с указанным _id не найдена');
       res.status(200).send({ data: card });
     })
     .catch((err) => {
@@ -43,11 +43,11 @@ const likeCard = (req, res, next) => {
     { new: true },
   )
     .then((card) => {
-      if (!card) throw new NotFoundError('Карточка м этим Id отсутствует');
+      if (!card) throw new NotFoundError('Передан несуществующий _id карточки');
       res.status(200).send({ data: card });
     })
     .catch((err) => {
-      if (err.name === 'CastError') next(new BadReqError('Переданы некоректные данные'));
+      if (err.name === 'CastError') next(new BadReqError(' Переданы некорректные данные для постановки лайка'));
       next(err);
     });
 };
@@ -59,11 +59,11 @@ const dislikeCard = (req, res, next) => {
     { new: true },
   )
     .then((card) => {
-      if (!card) throw new NotFoundError('Карточка м этим Id отсутствует');
+      if (!card) throw new NotFoundError('Передан несуществующий _id карточки');
       res.status(200).send({ data: card });
     })
     .catch((err) => {
-      if (err.name === 'CastError') next(new BadReqError('Переданы некоректные данные'));
+      if (err.name === 'CastError') next(new BadReqError(' Переданы некорректные данные для снятии лайка'));
       next(err);
     });
 };
