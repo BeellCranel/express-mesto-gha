@@ -1,5 +1,3 @@
-[![Tests 13 sprint](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml)[![Tests 14 sprint](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-14-sprint.yml/badge.svg)](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-14-sprint.yml)
-
 ## О работе
 
 ### Цели двенадцатой проектной работы:
@@ -13,7 +11,7 @@
 
 ### Технологии:
 
-![NodeJs](https://img.shields.io/badge/-NodeJs-090909?style=flat&logo=node.js)
+![NodeJs](https://img.shields.io/badge/-Node.js-090909?style=flat&logo=node.js)
 ![git](https://img.shields.io/badge/-git-090909?style=flat&logo=git)
 ![express](https://img.shields.io/badge/-express-090909?style=flat&logo=express)
 ![mongoose](https://img.shields.io/badge/-mongoose-090909?style=flat&logo=mongodb)
