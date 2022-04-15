@@ -1,7 +1,6 @@
 const Card = require('../models/card');
 const BadReqError = require('../errors/BedReqError');
 const NotFoundError = require('../errors/NotFounError');
-// const ForbiddenError = require('../errors/ForbiddenError');
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
@@ -19,6 +18,7 @@ const createCard = (req, res, next) => {
 const deleteCard = (req, res, next) => {
   Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {
+      if (!card) throw new NotFoundError('Карточка м этим Id отсутствует');
       res.status(200).send({ data: card });
     })
     .catch((err) => {
@@ -43,6 +43,7 @@ const likeCard = (req, res, next) => {
     { new: true },
   )
     .then((card) => {
+      if (!card) throw new NotFoundError('Карточка м этим Id отсутствует');
       res.status(200).send({ data: card });
     })
     .catch((err) => {
@@ -58,6 +59,7 @@ const dislikeCard = (req, res, next) => {
     { new: true },
   )
     .then((card) => {
+      if (!card) throw new NotFoundError('Карточка м этим Id отсутствует');
       res.status(200).send({ data: card });
     })
     .catch((err) => {

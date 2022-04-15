@@ -12,8 +12,7 @@ const findUsers = (req, res, next) => {
 };
 
 const findUserById = (req, res, next) => {
-  const userId = req.params.userId ? req.params.userId : req.user._id;
-  User.findById(userId)
+  User.findById(req.params.userId)
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
       res.status(200).send({ data: user });
@@ -42,8 +41,47 @@ const createUser = (req, res, next) => {
     });
 };
 
+const updateUser = (req, res, next) => {
+  User.findByIdAndUpdate(req.user._id, {
+    name: req.body.name,
+    about: req.body.about,
+  }, {
+    new: true,
+    runValidators: true,
+    upsert: true,
+  })
+    .then((user) => {
+      if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
+      res.status(200).send({ data: user });
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при редактировании профеля'));
+      next(err);
+    });
+};
+
+const updateAvatar = (req, res, next) => {
+  User.findByIdAndUpdate(req.user._id, {
+    avatar: req.body.avatar,
+  }, {
+    new: true,
+    runValidators: true,
+    upsert: true,
+  })
+    .then((user) => {
+      if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
+      res.status(200).send({ data: user });
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при редактировании аватара'));
+      next(err);
+    });
+};
+
 module.exports = {
   findUsers,
   findUserById,
   createUser,
+  updateUser,
+  updateAvatar,
 };
