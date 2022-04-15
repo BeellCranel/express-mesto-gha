@@ -1,6 +1,6 @@
 const Card = require('../models/card');
 const BadReqError = require('../errors/BedReqError');
-// const NotFoundError = require('../errors/NotFounError');
+const NotFoundError = require('../errors/NotFounError');
 // const ForbiddenError = require('../errors/ForbiddenError');
 
 const createCard = (req, res, next) => {
@@ -19,7 +19,7 @@ const createCard = (req, res, next) => {
 const deleteCard = (req, res, next) => {
   Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {
-      res.status(200).send({ data: card, message: 'Карточка успешно удалена' });
+      res.status(200).send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'CastError') next(new BadReqError('Переданы некоректные данные'));
@@ -29,7 +29,10 @@ const deleteCard = (req, res, next) => {
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => {
+      if (!card) throw new NotFoundError('В базе нет карточек');
+      res.status(200).send({ data: card });
+    })
     .catch((err) => next(err));
 };
 

@@ -9,15 +9,15 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/', userRouter);
-app.use('/', cardRouter);
 app.use((req, res, next) => {
   req.user = {
-    _id: '6255c59c44a588f62515e210',
+    _id: '5d8b8592978f8bd833ca8133',
   };
 
   next();
 });
+app.use('/', userRouter);
+app.use('/', cardRouter);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
