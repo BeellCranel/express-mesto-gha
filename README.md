@@ -1,27 +1,28 @@
-[![Tests](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml) [![Tests](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-14-sprint.yml/badge.svg)](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-14-sprint.yml)
+[![Tests for sprint 13](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml)[![Tests for sprint 14](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-14-sprint.yml/badge.svg)](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-14-sprint.yml)
 
-# Проект Mesto фронтенд + бэкенд
+## О работе
 
-## Настройка бейджей статуса тестов
+### Цели двенадцатой проектной работы:
 
-Перед началом работы над проектом рекомендуется исправить бейджи, отражающие статус прохождения тестов.
-Для этого замените разметку бейджей на следующий фрагмент, подставив вместо `${имя_пользователя}` и `${имя_репозитория}` соответствующие значения.
+- научиться настраивать и запускать сервер
+- научиться подключать и использовать MondoDB
+- научиться использовать ESLint
+- научиться использовать контроллеры, роуты, схемы моделей, мидлвэры
+- научиться отлавливать и обрабатывать ошибки
+- закрепить ранее полученые знания
 
-```
-[![Tests for sprint 13](https://github.com/${имя_пользователя}/${имя репозитория}/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/${имя_пользователя}/${имя репозитория}/actions/workflows/tests-13-sprint.yml)
+### Технологии:
 
-[![Tests for sprint 14](https://github.com/${имя_пользователя}/${имя репозитория}/actions/workflows/tests-14-sprint.yml/badge.svg)](https://github.com/${имя_пользователя}/${имя репозитория}/actions/workflows/tests-14-sprint.yml)
-```
+![NodeJs](https://img.shields.io/badge/-NodeJs-090909?style=flat&logo=node.js)
+![git](https://img.shields.io/badge/-git-090909?style=flat&logo=git)
+![express](https://img.shields.io/badge/-express-090909?style=flat&logo=express)
+![mongoose](https://img.shields.io/badge/-mongoose-090909?style=flat&logo=mongodb)
+![npm](https://img.shields.io/badge/-npm-090909?style=flat&logo=npm)
 
-## Директории
+### Интро
 
-`/routes` — папка с файлами роутера  
-`/controllers` — папка с файлами контроллеров пользователя и карточки  
-`/models` — папка с файлами описания схем пользователя и карточки
+Здесь будет проект Место: интерактивная страница, где можно регистрироваться, добавлять фотографии, удалять их и ставить лайки ❤️.
 
-Остальные директории вспомогательные, создаются при необходимости разработчиком
+### Статус
 
-## Запуск проекта
-
-`npm run start` — запускает сервер  
-`npm run dev` — запускает сервер с hot-reload
+В разработке
