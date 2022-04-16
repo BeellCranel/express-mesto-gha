@@ -65,7 +65,6 @@ const updateAvatar = (req, res, next) => {
   }, {
     new: true,
     runValidators: true,
-    upsert: true,
   })
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователь с указанным _id не найден');

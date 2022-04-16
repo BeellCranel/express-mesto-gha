@@ -30,7 +30,6 @@ const deleteCard = (req, res, next) => {
 const getCards = (req, res, next) => {
   Card.find({})
     .then((card) => {
-      if (!card) throw new NotFoundError('В базе нет карточек');
       res.status(200).send({ data: card });
     })
     .catch((err) => next(err));
