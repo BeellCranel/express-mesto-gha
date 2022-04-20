@@ -1,3 +1,5 @@
+[![Tests 13 sprint](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/BeellCranel/express-mesto-gha/actions/workflows/tests-13-sprint.yml)
+
 ## О работе
 
 ### Цели двенадцатой проектной работы:
