@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const NotFoundError = require('./errors/NotFounError');
@@ -7,8 +9,9 @@ const NotFoundError = require('./errors/NotFounError');
 const { PORT = 3000 } = process.env;
 const app = express();
 mongoose.connect('mongodb://localhost:27017/mestodb');
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   req.user = {
     _id: '6255c59c44a588f62515e210',
