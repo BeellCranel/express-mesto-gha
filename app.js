@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const userRouter = require('./routes/users');
@@ -15,8 +14,8 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
