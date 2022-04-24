@@ -34,9 +34,6 @@ const createUser = (req, res, next) => {
     email,
     password,
   } = req.body;
-
-  if (!email || !password) next(new BadReqError('Email иди password не могут быть пустыми'));
-
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name,
