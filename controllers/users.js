@@ -9,19 +9,37 @@ const JWT_SECRET = 'werysecretpassword';
 
 const findUsers = (req, res, next) => {
   User.find({})
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send({
+      data: {
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        email: user.email,
+        _id: user._id,
+      },
+    }))
     .catch(next);
 };
 
 const findUserById = (req, res, next) => {
-  const searchedUser = req.params.userId ? req.params.userId : req.user._id;
-  User.findById(searchedUser)
+  User.findById(req.params.userId)
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
-      res.status(200).send({ data: user });
+      return res.status(200).send({
+        data: {
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          email: user.email,
+          _id: user._id,
+        },
+      });
     })
     .catch((err) => {
-      if (err.name === 'CastError') next(new BadReqError('Переданы некорректные данные. Пользователь с этим Id отсутствует'));
+      if (err.name === 'CastError') {
+        next(new BadReqError('Переданы некорректные данные. Пользователь с этим Id отсутствует'));
+        return;
+      }
       next(err);
     });
 };
@@ -52,8 +70,14 @@ const createUser = (req, res, next) => {
       },
     }))
     .catch((err) => {
-      if (err.code === 11000) next(new ConflictError('Такой пользователь уже зарегистрирован'));
-      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при создании пользователя'));
+      if (err.code === 11000) {
+        next(new ConflictError('Такой пользователь уже зарегистрирован'));
+        return;
+      }
+      if (err.name === 'ValidationError') {
+        next(new BadReqError('Переданы некорректные данные при создании пользователя'));
+        return;
+      }
       next(err);
     });
 };
@@ -63,11 +87,19 @@ const login = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-      res.cookie('jwt', token, {
+      return res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
       })
-        .status(200).send({ data: user });
+        .status(200).send({
+          data: {
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar,
+            email: user.email,
+            _id: user._id,
+          },
+        });
     })
     .catch(next);
 };
@@ -82,10 +114,21 @@ const updateUser = (req, res, next) => {
   })
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователь с указанным _id не найден');
-      res.status(200).send({ data: user });
+      return res.status(200).send({
+        data: {
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          email: user.email,
+          _id: user._id,
+        },
+      });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при обновлении профиля'));
+      if (err.name === 'ValidationError') {
+        next(new BadReqError('Переданы некорректные данные при обновлении профиля'));
+        return;
+      }
       next(err);
     });
 };
@@ -99,10 +142,21 @@ const updateAvatar = (req, res, next) => {
   })
     .then((user) => {
       if (!user) throw new NotFoundError('Пользователь с указанным _id не найден');
-      res.status(200).send({ data: user });
+      return res.status(200).send({
+        data: {
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          email: user.email,
+          _id: user._id,
+        },
+      });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при обновлении аватара'));
+      if (err.name === 'ValidationError') {
+        next(new BadReqError('Переданы некорректные данные при обновлении аватара'));
+        return;
+      }
       next(err);
     });
 };
