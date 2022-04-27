@@ -9,16 +9,31 @@ const JWT_SECRET = 'werysecretpassword';
 
 const findUsers = (req, res, next) => {
   User.find({})
-    .then((user) => res.status(200).send({
-      data: {
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-        _id: user._id,
-      },
-    }))
+    .then((user) => res.status(200).send({ data: user }))
     .catch(next);
+};
+
+const findUserBySelfId = (req, res, next) => {
+  User.findById(req.user._id)
+    .then((user) => {
+      if (!user) throw new NotFoundError('Пользователь по указанному _id не найден');
+      return res.status(200).send({
+        data: {
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          email: user.email,
+          _id: user._id,
+        },
+      });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadReqError('Переданы некорректные данные. Пользователь с этим Id отсутствует'));
+        return;
+      }
+      next(err);
+    });
 };
 
 const findUserById = (req, res, next) => {
@@ -163,6 +178,7 @@ const updateAvatar = (req, res, next) => {
 
 module.exports = {
   findUsers,
+  findUserBySelfId,
   findUserById,
   createUser,
   login,
