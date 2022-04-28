@@ -5,7 +5,7 @@ const BadReqError = require('../errors/BedReqError');
 const NotFoundError = require('../errors/NotFounError');
 const ConflictError = require('../errors/ConflictError');
 
-const JWT_SECRET = 'werysecretpassword';
+const JWT_SECRET = 'verysecretpassword';
 
 const findUsers = (req, res, next) => {
   User.find({})
